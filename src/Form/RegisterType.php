@@ -11,18 +11,23 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Length;
 
 class RegisterType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('firstname',TextType::class,[
-                'label'=> 'Votre prénom',
-                'attr'=>[
-                    'placeholder' =>'Merci de saisir votre prénom'
-                    ] 
-                    ])
+        ->add('firstname', TextType::class,[
+            'label'=> 'Votre prénom : ',
+            'constraints'=> new Length([
+                'min'=>2,
+                'max'=>30
+            ]),
+            'attr'=> [
+                'placeholder'=>'Merci de saisir votre prénom'
+            ]
+        ])
 
             ->add('lastname',TextType::class,[
                 'label'=> 'Votre nom',
@@ -42,8 +47,16 @@ class RegisterType extends AbstractType
                     "invalid_message" => 'Le mot de passe et la confirmation doivent être identiques',
                     'options' => ['attr' =>[ 'class' =>'password-field']],
                     "required" => true,
-                    "first_options" => [ "label" => "Mot de passe" ],
-                    "second_options" => [ "label" => "Confirmez votre mot de passe" ]
+                    "first_options" => [ 
+                        "label" => "Mot de passe",
+                        'attr'=> ['placeholder'=>'Merci de saisir votre mot de passe']
+                     ],
+
+                    "second_options" => [
+                        "label" => "Confirmez votre mot de passe",
+                        'attr'=> ['placeholder'=>'Merci de saisir votre mot de passe']
+                        
+                         ]
                 ])
 
                 
