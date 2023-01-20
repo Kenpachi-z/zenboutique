@@ -46,7 +46,7 @@ $user->setPassword($password);
             $this->entityManager->flush();
             
         }
-        
+
        if ($form->isSubmitted() && $form->isValid()) { 
             
         }
