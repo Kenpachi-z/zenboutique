@@ -23,6 +23,9 @@ class AccountPasswordController extends AbstractController
     #[Route('/compte/password', name: 'app_account_password')]
     public function index(Request $request, UserPasswordHasherInterface $passwordHasher): Response
     {
+        $notification = null();
+
+
         $user = $this->getUser();
         $form = $this->createForm(ChangePasswordType::class, $user);
 
@@ -40,13 +43,18 @@ class AccountPasswordController extends AbstractController
 
                 $this->entityManager->persist($user);
                 $this->entityManager->flush();
+                $notification = 'Votre mot de passe à été mis aà jour'; {}
                 
+                
+            }else{
+                $notification = "votre mote de passe actuel est erroné";
             }
 
         }
 
         return $this->render('account/password.html.twig',[
-        'form'=>$form->createView()
+        'form'=>$form->createView(),
+        'notification'=>$notification
         ] );
     }
 }
