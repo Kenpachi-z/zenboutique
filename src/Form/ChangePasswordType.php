@@ -13,7 +13,7 @@ class ChangePasswordType extends AbstractType
     {
         $builder
             ->add('email')
-            ->add('roles')
+           
             ->add('password')
             ->add('Firstname')
             ->add('lastname')
