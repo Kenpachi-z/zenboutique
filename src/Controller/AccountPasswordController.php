@@ -23,7 +23,7 @@ class AccountPasswordController extends AbstractController
     #[Route('/compte/password', name: 'app_account_password')]
     public function index(Request $request, UserPasswordHasherInterface $passwordHasher): Response
     {
-        $notification = null();
+        $notification = null;
 
 
         $user = $this->getUser();
@@ -43,7 +43,7 @@ class AccountPasswordController extends AbstractController
 
                 $this->entityManager->persist($user);
                 $this->entityManager->flush();
-                $notification = 'Votre mot de passe à été mis aà jour'; {}
+                $notification = 'Votre mot de passe à été mis aà jour'; 
                 
                 
             }else{
