@@ -2,12 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\ProductRepository;
+use App\Repository\ProduitRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: ProductRepository::class)]
-class Product
+#[ORM\Entity(repositoryClass: ProduitRepository::class)]
+class Produit
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -18,7 +18,7 @@ class Product
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $slug = null;
+    private ?string $Slug = null;
 
     #[ORM\Column(length: 255)]
     private ?string $illustration = null;
@@ -32,7 +32,7 @@ class Product
     #[ORM\Column]
     private ?float $price = null;
 
-    #[ORM\ManyToOne(inversedBy: 'products')]
+    #[ORM\ManyToOne(inversedBy: 'produits')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Category $category = null;
 
@@ -55,12 +55,12 @@ class Product
 
     public function getSlug(): ?string
     {
-        return $this->slug;
+        return $this->Slug;
     }
 
-    public function setSlug(string $slug): self
+    public function setSlug(string $Slug): self
     {
-        $this->slug = $slug;
+        $this->Slug = $Slug;
 
         return $this;
     }
