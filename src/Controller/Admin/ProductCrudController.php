@@ -16,6 +16,12 @@ class ProductCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         
+        
+
+
+
+
+
     }
     
 }
