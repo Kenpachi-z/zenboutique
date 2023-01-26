@@ -20,14 +20,17 @@ class Category
     private ?string $name = null;
 
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Produit::class)]
-    private Collection $produits;
+    private $produits;
 
     public function __construct()
     {
         $this->produits = new ArrayCollection();
     }
 
-    
+    public function __toString(){
+
+        return $this->getName();
+    }
     public function getId(): ?int
     {
         return $this->id;
