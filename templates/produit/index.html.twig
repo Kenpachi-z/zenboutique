@@ -3,8 +3,21 @@
 {% block title %}Nos produits -French_boutique{% endblock %}
 
 {% block content %}
+
+<div class ="row produit-container">
 <h1>Nos produits</h1>
 {% for produit in produit %}
+<div class ="col-md-4">
+<div class ="produit-item text-center">
+<a href ="{{ path('app_product', {'Slug' : produit.Slug } )}}"><img src ="/img/{{ produit.illustration }}" alt="{{produit.name }}" class="img-fluid"></a>
+<h5>{{produit.name}} </h5>
+<span class="produit-subtitle">{{produit.subtitle}} </span>
+<span class="produit-price">{{(produit.price / 100)|number_format(2, ',','.')}} </span>
 
-{% endfor%}
+</div>
+
+</div>
+
+{% endfor %}
+</div>
 {% endblock %}

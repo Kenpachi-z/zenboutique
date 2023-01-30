@@ -11,3 +11,29 @@
     background-image: linear-gradient(to right bottom, #6b6dd1, #c462be, #f86197, #ff796a, #ffa145, #ffae3d, #ffbc35, #ffca2d, #ffb93a, #ffa947, #ff9b54, #fb8e5f);
     padding-top: 25px;
 }
+.produit-item h5{
+    text-transform: uppercase;
+    font-size: 15px;
+    margin-bottom: 1px; 
+
+}
+
+.produit-item {
+    margin-bottom: 50px;
+}
+
+.produit-item .produit-subtitle {
+    font-size: 14px;
+    display: block;
+    margin-bottom: 10px;
+
+}
+
+.produit-item .produit-price {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.produit-container {
+    margin-bottom: 150px;
+}

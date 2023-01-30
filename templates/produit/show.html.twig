@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{produit.name}} -French_boutique{% endblock %}
+
+{% block content %}
+<div class ="row">
+<div class ="col -md-4">
+ <img src ="/img/{{ produit.illustration }}" alt="{{produit.name }}" class="img-fluid">
+</div>
+<div class="col-md-8">
+<h3>{{produit.name}}</h3>
+
+
+</div>
+
+
+
+
+</div>
+
+
+
+
+
+<h1> {{produit.name}}  </h1>
+{{dump(produit)}}
+
+{% endblock %}
