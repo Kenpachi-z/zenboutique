@@ -19,7 +19,9 @@ class SearchType extends abstractType
                 'attr' => [
                     'placeholder' => 'votre recherche...'
                 ]
-            ]);
+            ])
+            
+            ;
 
     }
     public function configureOptions(OptionsResolver $resolver): void
