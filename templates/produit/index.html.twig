@@ -3,9 +3,15 @@
 {% block title %}Nos produits -French_boutique{% endblock %}
 
 {% block content %}
-
-<div class ="row produit-container">
+<div class ="row">
+<div class="col-md-3">      
+<h3> Filtrer </h3>
+{{form(form)}}
+</div>
+<div class="col-md-9"> 
 <h1>Nos produits</h1>
+<div class ="row produit-container">
+
 {% for produit in produit %}
 <div class ="col-md-4">
 <div class ="produit-item text-center">
@@ -19,5 +25,11 @@
 </div>
 
 {% endfor %}
+</div> 
 </div>
+
+</div>
+
+
+
 {% endblock %}

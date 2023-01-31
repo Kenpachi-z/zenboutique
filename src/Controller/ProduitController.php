@@ -3,7 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Produit;
-
+use App\Classe\Search;
+use App\Form\SearchType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,9 +27,12 @@ class ProduitController extends AbstractController
     public function index(): Response
     {
         $produit= $this->entityManager->getRepository(Produit::class)->findAll();
+        $search = new Search();
+        $form = $this->createForm(SearchType::class, $search);
 
         return $this->render('produit/index.html.twig',[
-            'produit'=>$produit
+            'produit'=>$produit,
+            'form'=> $form->createView()
         ] 
      );
 
