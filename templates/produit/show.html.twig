@@ -4,13 +4,17 @@
 
 {% block content %}
 <div class ="row">
-<div class ="col -md-4">
+<div class ="col -md-5">
  <img src ="/img/{{ produit.illustration }}" alt="{{produit.name }}" class="img-fluid">
 </div>
-<div class="col-md-8">
+<div class="col-md-7 my-auto">
 <h3>{{produit.name}}</h3>
-
-
+<p>{{produit.subtitle}}</p>
+<span class ="product-page-price">{{(produit.price / 100)|number_format(2, ',','.')}}</span> 
+<hr>
+<p>
+{{produit.description}}</p>
+<a href="" class="btn btn-dark">Ajouter au panier</a>
 </div>
 
 
@@ -22,7 +26,7 @@
 
 
 
-<h1> {{produit.name}}  </h1>
-{{dump(produit)}}
+
+
 
 {% endblock %}
