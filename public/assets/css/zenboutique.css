@@ -11,7 +11,7 @@
 .Footer-custom{
     text-align: center;
     position: absolute;
-    bottom: 0;
+    
     width: 100%;
     background-image: linear-gradient(to right bottom, #6b6dd1, #c462be, #f86197, #ff796a, #ffa145, #ffae3d, #ffbc35, #ffca2d, #ffb93a, #ffa947, #ff9b54, #fb8e5f);
     padding-top: 25px;
