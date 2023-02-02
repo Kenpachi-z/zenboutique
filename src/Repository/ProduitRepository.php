@@ -44,7 +44,7 @@ class ProduitRepository extends ServiceEntityRepository
         return $query->getQuery()->getResult();
 
     }
-   
+  
     public function save(Produit $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
