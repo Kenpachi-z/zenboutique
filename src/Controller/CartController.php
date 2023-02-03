@@ -3,18 +3,42 @@
 namespace App\Controller;
 
 use App\classe\Cart;
+use App\Entity\Produit;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Doctrine\ORM\EntityManagerInterface;
 class CartController extends AbstractController
 {
+    private $entityManager;
+
+    public function __construct(entityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+
+    }
+
+
+
+
     #[Route('/mon-panier', name: 'app_cart')]
     public function index(Cart $cart): Response
 
     {
-        dd($cart->get());
-        return $this->render('cart/index.html.twig');
+        $cartComplete = [];
+
+        foreach ($cart->get() as $id => $quantity) {
+            $cartComplete[] = [
+                'produit'=> $this->entityManager->getRepository(Produit::class)->findOneById($id),
+                'quantity'=> $quantity
+            ];
+        }
+
+        dd($cartComplete);
+        
+        return $this->render('cart/index.html.twig',[
+            'cart'=>$cart->get()
+        ]);
     }
     #[Route('/cart/add/{id}', name: 'app_add_to_cart')]
     public function add(Cart $cart, $id): Response 
