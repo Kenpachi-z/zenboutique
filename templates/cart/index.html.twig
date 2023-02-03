@@ -8,7 +8,7 @@
 Retrouvez l'ensembles des produits que vous avez ajouté à votre panier.
 <hr>
 Mon panier
-{{dump(cart)}}
+
 <table class="table">
   <thead>
     <tr>
@@ -21,11 +21,13 @@ Mon panier
   </thead>
   <tbody>
   {% for produit in cart %}
+  {{dump(produit)}}
     <tr>
-      <th>1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
+      <th> {{ produit.produit.name }} </th>
+      <td>{{ produit.quantity }} </td>
+      <td> {{(produit.produit.price / 100)|number_format(2, ',','.')}} </td>
+      <td> {{ ((produit.produit.price * produit.quantity)/100 ) |number_format(2, ',','.')}} </td>
+      
     </tr>
     {% endfor %}
   </tbody>

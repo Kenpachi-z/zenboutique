@@ -34,10 +34,10 @@ class CartController extends AbstractController
             ];
         }
 
-        dd($cartComplete);
+       
         
         return $this->render('cart/index.html.twig',[
-            'cart'=>$cart->get()
+            'cart'=>$cartComplete
         ]);
     }
     #[Route('/cart/add/{id}', name: 'app_add_to_cart')]
