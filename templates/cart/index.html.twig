@@ -8,7 +8,7 @@
 Retrouvez l'ensembles des produits que vous avez ajouté à votre panier.
 <br>
 <hr>
-
+{% if cart|length > 0 %}
 
 <table class="table mt-3">
   <thead>
@@ -28,20 +28,31 @@ Retrouvez l'ensembles des produits que vous avez ajouté à votre panier.
     <tr>
       <th> 
       <img src ="/img/{{ produit.produit.illustration}}" alt ="{{produit.produit.name}}"height="75px"><br>
-      
+
       </th>
       <td>
       {{ produit.produit.name }}<br>
       <small>{{ produit.produit.subtitle }}</small>
       </td>
-      <td>{{ produit.quantity }} </td>
+      <td>
+      {#ajouter et supprimer produit #}
+      <a href="{{ path('app_add_to_cart', {'id' :produit.produit.id}) }} ">
+      <img src="{{ asset ('assets/pict/add.png')}}" height="24px" alt="Supprimer mon produit"></a>
+      {{ produit.quantity }} 
+      <a href="{{ path('app_delete_to_cart', {'id' :produit.produit.id}) }} ">
+      <img src="{{ asset ('assets/pict/ecrase.png')}}" height="24px" alt="Supprimer mon produit"><a>
+      </td>
+      {#ajouter et supprimer produit #}
+
       <td> {{(produit.produit.price / 100)|number_format(2, ',','.')}} </td>
       <td> {{ ((produit.produit.price * produit.quantity)/100 ) |number_format(2, ',','.')}} €</td>
+     
       <td>
+      {#supprimer produit #}
       <a href="{{ path('app_delete_to_cart', {'id' :produit.produit.id}) }} ">
       <img src="{{ asset ('assets/pict/delete.png')}}" height="24px" alt="Supprimer mon produit"></td>
      </a>
-
+{# supprimer produit #}
     </tr>
     {% set total = total + (produit.produit.price * produit.quantity) %}
     {% endfor %}
@@ -58,4 +69,8 @@ Retrouvez l'ensembles des produits que vous avez ajouté à votre panier.
   <a href="" class="btn btn-secondary" type="button">Valider mon panier</a>
 </div>
 <br>
+{% else %}
+
+<p> Votre panier est vide .</p>
+{% endif %}
 {% endblock %}
