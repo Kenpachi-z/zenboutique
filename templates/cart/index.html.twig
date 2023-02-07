@@ -22,6 +22,7 @@ Retrouvez l'ensembles des produits que vous avez ajouté à votre panier.
     </tr>
   </thead>
   <tbody>
+  {% set total = null %}
   {% for produit in cart %}
   
     <tr>
@@ -35,18 +36,22 @@ Retrouvez l'ensembles des produits que vous avez ajouté à votre panier.
       </td>
       <td>{{ produit.quantity }} </td>
       <td> {{(produit.produit.price / 100)|number_format(2, ',','.')}} </td>
-      <td> {{ ((produit.produit.price * produit.quantity)/100 ) |number_format(2, ',','.')}} </td>
-      
+      <td> {{ ((produit.produit.price * produit.quantity)/100 ) |number_format(2, ',','.')}} €</td>
+
     </tr>
+    {% set total = total + (produit.produit.price * produit.quantity) %}
     {% endfor %}
   </tbody>
 </table>
+<div class="text-end mb-5">
 
-<div class ="text">
-
-<b>nombre de produit:</b>...</br>
-<b>Total de mon panier:</b>...
-<a href="" class ="btn btn-success btn-block"> valider mon panier</a>
-
+<b>nombre de produit:</b> {{cart|length}} </br>
+<b>Total de mon panier:</b>{{ (total / 100 ) |number_format(2, ',','.')}} €
+<br>
 </div>
+
+<div class="d-grid gap-2 col-12 mx-auto">
+  <a href="" class="btn btn-secondary" type="button">Valider mon panier</a>
+</div>
+<br>
 {% endblock %}
