@@ -35,7 +35,7 @@ class CartController extends AbstractController
         }
 
        
-        
+       
         return $this->render('cart/index.html.twig',[
             'cart'=>$cartComplete
         ]);
@@ -46,6 +46,19 @@ class CartController extends AbstractController
         $cart->add($id);
         return $this->redirectToRoute('app_cart');
     }
+    #[Route('/cart/remove', name: 'app_remove_my_cart')]
+    public function remove(Cart $cart): Response 
+    {
+        $cart->remove();
+        return $this->redirectToRoute('app_produit');
+   
+    }
 
+    #[Route('/cart/delete/{id} ', name: 'app_delete_to_cart')]
+    public function delete(Cart $cart, $id): Response 
+    {
+        $cart->delete($id);
+        return $this->redirectToRoute('app_cart');
+    }
 }
 
