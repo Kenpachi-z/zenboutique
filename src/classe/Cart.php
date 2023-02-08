@@ -53,5 +53,23 @@ class Cart
         return $session->set('cart',$cart);
     
     }
+    public function decrease($id)
+    {
+        
+        $session = $this->stack->getSession();
+        $cart = $session->get('cart', []);
 
+        if($cart[$id]>1 ){
+            $cart[$id]--;
+
+        } else {
+            //supprimer mon produit (-1)
+            unset($cart[$id]);
+        }
+
+        
+       
+        return $session->set('cart',$cart);
+    
+    }
 }

@@ -39,14 +39,14 @@ Retrouvez l'ensembles des produits que vous avez ajouté à votre panier.
       <a href="{{ path('app_add_to_cart', {'id' :produit.produit.id}) }} ">
       <img src="{{ asset ('assets/pict/add.png')}}" height="24px" alt="Supprimer mon produit"></a>
       {{ produit.quantity }} 
-      <a href="{{ path('app_delete_to_cart', {'id' :produit.produit.id}) }} ">
+      <a href="{{ path('app_decrease_to_cart', {'id' :produit.produit.id}) }} ">
       <img src="{{ asset ('assets/pict/ecrase.png')}}" height="24px" alt="Supprimer mon produit"><a>
       </td>
       {#ajouter et supprimer produit #}
 
       <td> {{(produit.produit.price / 100)|number_format(2, ',','.')}} </td>
       <td> {{ ((produit.produit.price * produit.quantity)/100 ) |number_format(2, ',','.')}} €</td>
-     
+    
       <td>
       {#supprimer produit #}
       <a href="{{ path('app_delete_to_cart', {'id' :produit.produit.id}) }} ">
