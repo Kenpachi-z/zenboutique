@@ -13,5 +13,13 @@ class AccountAdressController extends AbstractController
     {
         //dd($this->getUser());
         return $this->render('account/adress.html.twig');
+   
+    }
+
+    #[Route('/compte/ajouter-une-adresse', name: 'app_account_adress_add')]
+    public function add(): Response
+    {
+        //dd($this->getUser());
+        return $this->render('account/adress_add.html.twig');
     }
 }
