@@ -10,7 +10,7 @@
 Bienvenue {{ (app.user.firstname) }} dans votre gestionnaire  de vos adresses.
 <br>
 <hr>
-<a href =" {{ path('app_account') }} ">Retourner a mon compte  <a/><br>
+<a href =" {{ path('app_account') }} ">Retourner a mon compte  <a/><br><br>
 {% if app.user.adresses|length == 0 %}
 <p class ="text-center">
 Veuillez ajouté une adresse dans votre compte client.<br>
@@ -23,8 +23,12 @@ Pour ajouter une adresse, veuillez <a href ="{{ path('app_account_adress_add')}}
 <div class="card" style="width: 18rem;">
   <div class="card-body">
     <h5 class="card-title"> {{ adress.name}} </h5>
-     <p class="card-text">{{ adress.adress}} </p>
-    <a href="#" class="btn btn-primary">Modifier</a>
+     <p class="card-text">
+    {{ adress.adress}}, <br/>
+    {{ adress.postal}} - {{ adress.city}} - {{ adress.country}}  
+     </p>
+    <a href="{{ path('app_account_adress_edit',{'id' : adress.id}) }}">Modifier</a> | <a href="{{ path('app_account_adress_delete',{'id' : adress.id}) }}">Supprimer</a>
+
   </div>
 </div>
 </div>
