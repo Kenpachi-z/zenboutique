@@ -1,5 +1,9 @@
 <?php
-namespace App\Classe;
+namespace App\classe;
+{
+    
+}
+
 use App\entity\Category;
 
 
