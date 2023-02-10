@@ -58,9 +58,9 @@ class AdressType extends AbstractType
                 ]
             ])
             ->add('country', CountryType::class,[
-                'label' => 'Quel nom souhaitez-vous donner a votre adresse ?',
+                'label' => 'Pays',
                 'attr' => [
-                    'placeholder' => 'Nommez votre adresse'
+                    'placeholder' => 'Indiquez votre Pays de residence'
                 ]
             ])
             ->add('phone', Teltype::class,[
@@ -70,7 +70,15 @@ class AdressType extends AbstractType
                 ]
             ])
             ->add('submit', SubmitType::class,[
-                'label'=>'Ajouter mon adresse'
+                'label'=>'Ajouter mon adresse',
+                'attr'=>[
+                    ' class'=>'btn col-12 btn-primary'
+                 
+                    
+
+                ]
+                
+                
             ])
         ;
     }
@@ -79,6 +87,7 @@ class AdressType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Adress::class,
+            
         ]);
     }
 }
