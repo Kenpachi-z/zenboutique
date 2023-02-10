@@ -4,7 +4,7 @@
 
 
 {% block content %}
-<a href ="{{ path('app_account_adress_add') }} "  class="btn btn-info btn-sm float-end">Ajouter une adresse</a>
+<a href ="{{ path('app_account_adress_add') }} "  class="btn btn-primary btn-sm float-end">Ajouter une adresse</a>
 <h1> Mes adresses </h1>
 
 Bienvenue {{ (app.user.firstname) }} dans votre gestionnaire  de vos adresses.
@@ -17,9 +17,19 @@ Veuillez ajouté une adresse dans votre compte client.<br>
 Pour ajouter une adresse, veuillez <a href ="{{ path('app_account_adress_add')}} ">cliquer ici </a>.
 </p>
 {% else %}
-
-AFFICHER DES adresses
-
+<div class="row">
+{% for adress in app.user.adresses %}
+<div class="col-md-4">
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title"> {{ adress.name}} </h5>
+     <p class="card-text">{{ adress.adress}} </p>
+    <a href="#" class="btn btn-primary">Modifier</a>
+  </div>
+</div>
+</div>
+{% endfor %}
+</div>
 {% endif %}
 
 {% endblock %}

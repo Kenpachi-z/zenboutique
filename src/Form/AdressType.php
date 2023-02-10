@@ -28,7 +28,7 @@ class AdressType extends AbstractType
                 ]
             ])
             ->add('Lastname', TextType::class,[
-                'label' => 'Votre nom?',
+                'label' => 'Votre nom',
                 'attr' => [
                     'placeholder' => 'Entrez votre nom'
                 ]
@@ -72,13 +72,9 @@ class AdressType extends AbstractType
             ->add('submit', SubmitType::class,[
                 'label'=>'Ajouter mon adresse',
                 'attr'=>[
-                    ' class'=>'btn col-12 btn-primary'
-                 
-                    
-
-                ]
-                
-                
+                    ' class'=>'btn col-12 btn-primary
+                    '
+                ]  
             ])
         ;
     }
