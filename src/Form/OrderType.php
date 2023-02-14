@@ -12,12 +12,14 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class OrderType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
-    {
+ {  
+        $user = $options['user'];
         $builder
             ->add('adresses',EntityType::class,[
                 'label'=>'choissisez votre adress de livraison',
                 'required' => true,
                 'class' => Adress::class,
+                'choices' => $user->getAdresses(),
                 'multiple' => false,
                 'expanded' => true
             ])
@@ -27,7 +29,9 @@ class OrderType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            // Configure your form options here
+            'user' => array()
+           
+            
         ]);
     }
 }
