@@ -37,6 +37,9 @@ class Order
     #[ORM\OneToMany(mappedBy: 'myOrder', targetEntity: OrderDetail::class)]
     private Collection $orderDetails;
 
+    #[ORM\Column]
+    private ?bool $IsPaid = null;
+
     public function __construct()
     {
         $this->orderDetails = new ArrayCollection();
@@ -133,6 +136,18 @@ class Order
                 $orderDetail->setMyOrder(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isIsPaid(): ?bool
+    {
+        return $this->IsPaid;
+    }
+
+    public function setIsPaid(bool $IsPaid): self
+    {
+        $this->IsPaid = $IsPaid;
 
         return $this;
     }
