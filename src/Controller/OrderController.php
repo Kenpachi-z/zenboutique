@@ -35,4 +35,27 @@ class OrderController extends AbstractController
             'cart'=>$cart->getFull()
         ]);
     }
+
+     #[Route('/commande/recapitulatif', name: 'app_order_recap')]
+    public function add(Cart $cart, Request $request): Response
+    {
+        
+
+        $form =$this->createForm(OrderType::class, null, [
+            'user'=> $this->getUser()
+        ]);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            dd($form->getData());
+          
+
+        }
+        
+        return $this->render('order/index.html.twig',[
+            
+            'cart'=>$cart->getFull()
+        ]);
+    }
 }
