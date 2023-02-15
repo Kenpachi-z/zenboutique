@@ -17,9 +17,34 @@
 {{ formHtml|replace({'[br]' :'<br/>'})|raw}}
 
 </div>
+
 <div class ="col-md-6">
+<div class ="text-center">
 <b>Récapitulatif de ma commande</b><br>
-<b>Bouton pour payer</b>
+</div>
+
+<div class="order-summary">
+{% for key,produit in cart %}
+<div class ="row {% if key > 0 %}mt-2{% endif %}">
+<div class =" col-2">
+<img src ="/img/{{ produit.produit.illustration}}" alt ="{{produit.produit.name}}"height="75px">
+</div>
+
+<div class =" col-8 my-auto">
+{{ produit.produit.name }}<br>
+ <small>{{ produit.produit.subtitle }}</small>
+</div>
+
+<div class =" col-2 my-auto"> 
+x {{produit.quantity}} 
+</div>
+</div>
+
+
+{% endfor %}
+</div>
+
+
 </div>
 
 </div>

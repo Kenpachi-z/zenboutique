@@ -24,7 +24,7 @@ Retrouvez l'ensembles des produits que vous avez ajouté à votre panier.
   <tbody>
   {% set total = null %}
   {% for produit in cart %}
-  
+
     <tr>
       <th> 
       <img src ="/img/{{ produit.produit.illustration}}" alt ="{{produit.produit.name}}"height="75px"><br>
@@ -36,16 +36,16 @@ Retrouvez l'ensembles des produits que vous avez ajouté à votre panier.
       </td>
       <td>
       {#ajouter et supprimer produit #}
-      <a href="{{ path('app_add_to_cart', {'id' :produit.produit.id}) }} ">
-      <img src="{{ asset ('assets/pict/add.png')}}" height="24px" alt="Supprimer mon produit"></a>
+      <a href="{{ path('app_add_to_cart', {'id' :produit.produit.id }) }} ">
+      <img src="{{ asset ('assets/pict/add.png')}}" height="24px" alt="Ajouter mon produit"></a>
       {{ produit.quantity }} 
       <a href="{{ path('app_decrease_to_cart', {'id' :produit.produit.id}) }} ">
-      <img src="{{ asset ('assets/pict/ecrase.png')}}" height="24px" alt="Supprimer mon produit"><a>
+      <img src="{{ asset ('assets/pict/ecrase.png')}}" height="24px" alt="Retirer mon produit"><a>
       </td>
       {#ajouter et supprimer produit #}
 
-      <td> {{(produit.produit.price / 100)|number_format(2, ',','.')}} </td>
-      <td> {{ ((produit.produit.price * produit.quantity)/100 ) |number_format(2, ',','.')}} €</td>
+      <td> {{(produit.produit.price /100)|number_format(2, ',','.')}} </td>
+      <td> {{ ((produit.produit.price * produit.quantity) /100 )|number_format(2, ',','.') }} €</td>
     
       <td>
       {#supprimer produit #}
@@ -60,13 +60,13 @@ Retrouvez l'ensembles des produits que vous avez ajouté à votre panier.
 </table>
 <div class="text-end mb-5">
 
-<b>nombre de produit:</b> {{cart|length}} </br>
+<b>nombre de produit:</b> {{ cart|length }} </br>
 <b>Total de mon panier:</b>{{ (total / 100 ) |number_format(2, ',','.')}} €
 <br>
 </div>
 
 <div class="d-grid gap-2 col-12 mx-auto">
-  <a href=" {{ path('app_order') }} " class="btn btn-outline-success type="button">Valider mon panier</a>
+  <a href=" {{ path('app_order') }} " class="btn btn-outline-success "type="button">Valider mon panier</a>
 </div>
 <br>
 {% else %}
