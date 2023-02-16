@@ -2,16 +2,29 @@
 
 namespace App\Controller;
 
+
 use App\classe\Cart;
+use App\Entity\Order;
+use App\Entity\orderDetails;
 use App\Form\OrderType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeImmutable;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 ;
 class OrderController extends AbstractController
 {
+    private $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+
+    }
+
+
     #[Route('/commande', name: 'app_order')]
     public function index(Cart $cart, Request $request): Response
     {
@@ -64,17 +77,35 @@ class OrderController extends AbstractController
          $delivery_content.= '<br/>'.$delivery->getAdress();
          $delivery_content.= '<br/>'.$delivery->getPostal().''.$delivery->getCity();$delivery_content.= '<br/>'.$delivery->getCountry();
 
-           dd($delivery_content);
+           // Enregistrer ma commande order ()
           $order= new Order();
 
-          $order->setUser($this->getUser);
+          $order->setUser($this->getUser());
           $order->setCreatedAt($date);
           $order->setCarrierName($carriers->getName());
-          $order->setCarrierPrice($carriers->getCarrierPrice());
+          $order->setCarrierPrice($carriers->getPrice());
+          $order->setDelivery($delivery_content);
+          $order->setIspaid(0);
+          
+          $this->entityManager->persist($order);
+
+         //Enregistrer mes produits orderDetails()
+
+          foreach($cart->getFull() as $produit) {
+           $orderDetails = new OrderDetails();
+
+            $orderDetails->setMyOrder($order);
+            $orderDetails->setProduit($produit['produit'] ->getName());
+            $orderDetails->setQuantity($produit ['quantity']);
+            $orderDetails->setPrice($produit ['quantity']);
+            $orderDetails->setQuantity($produit ['produit']->getPrice());
+            $orderDetails->setTotal($produit ['produit']->getPrice() * $produit ['quantity']);
+            $this->entityManager->persist($orderDetails);
+            //dd($produit);
+          }
 
 
-
-
+            $this->entityManager->flush();
         }
         
         return $this->render('order/add.html.twig',[

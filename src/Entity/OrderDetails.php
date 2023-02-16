@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\OrderDetailRepository;
+use App\Repository\OrderDetailslRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: OrderDetailRepository::class)]
-class OrderDetail
+#[ORM\Entity(repositoryClass: OrderDetailslRepository::class)]
+class orderDetails
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -18,7 +18,7 @@ class OrderDetail
     private ?Order $myOrder = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $product = null;
+    private ?string $produit = null;
 
     #[ORM\Column]
     private ?int $quantity = null;
@@ -46,14 +46,14 @@ class OrderDetail
         return $this;
     }
 
-    public function getProduct(): ?string
+    public function getProduit(): ?string
     {
-        return $this->product;
+        return $this->produit;
     }
 
-    public function setProduct(string $product): self
+    public function setProduit(string $produit): self
     {
-        $this->product = $product;
+        $this->produit = $produit;
 
         return $this;
     }

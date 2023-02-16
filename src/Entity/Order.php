@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+
 use App\Repository\OrderRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -34,7 +35,7 @@ class Order
     #[ORM\Column(type: Types::TEXT)]
     private ?string $delivery = null;
 
-    #[ORM\OneToMany(mappedBy: 'myOrder', targetEntity: OrderDetail::class)]
+    #[ORM\OneToMany(mappedBy: 'myOrder', targetEntity: OrderDetails::class)]
     private Collection $orderDetails;
 
     #[ORM\Column]
@@ -111,29 +112,29 @@ class Order
     }
 
     /**
-     * @return Collection<int, OrderDetail>
+     * @return Collection<int, OrderDetails>
      */
     public function getOrderDetails(): Collection
     {
         return $this->orderDetails;
     }
 
-    public function addOrderDetail(OrderDetail $orderDetail): self
+    public function addOrderDetails(orderDetails $orderDetails): self
     {
-        if (!$this->orderDetails->contains($orderDetail)) {
-            $this->orderDetails->add($orderDetail);
-            $orderDetail->setMyOrder($this);
+        if (!$this->orderDetails->contains($orderDetails)) {
+            $this->orderDetails->add($orderDetails);
+            $orderDetails->setMyOrder($this);
         }
 
         return $this;
     }
 
-    public function removeOrderDetail(OrderDetail $orderDetail): self
+    public function removeOrderDetails(orderDetails $orderDetails): self
     {
-        if ($this->orderDetails->removeElement($orderDetail)) {
+        if ($this->orderDetails->removeElement($orderDetails)) {
             // set the owning side to null (unless already changed)
-            if ($orderDetail->getMyOrder() === $this) {
-                $orderDetail->setMyOrder(null);
+            if ($orderDetails->getMyOrder() === $this) {
+                $orderDetails->setMyOrder(null);
             }
         }
 
