@@ -50,7 +50,7 @@ class OrderController extends AbstractController
         ]);
     }
 
-     #[Route('/commande/recapitulatif', name: 'app_order_recap')]
+     #[Route('/commande/recapitulatif', name: 'app_order_recap', methods:("POST"))]
     public function add(Cart $cart, Request $request): Response
     {
         
@@ -65,7 +65,7 @@ class OrderController extends AbstractController
            $date = new \DateTimeImmutable();
            $carriers = $form->get('carriers')->getData();
            $delivery = $form->get('adresses')->getData();
-           $delivery_content = $delivery->getFirstname().''.$delivery->getLastname();
+           $delivery_content = $delivery->getFirstname() .''.$delivery->getLastname();
            $delivery_content.= '<br/>'.$delivery->getPhone();
 
            if($delivery->getCompagny())
@@ -103,15 +103,19 @@ class OrderController extends AbstractController
             $this->entityManager->persist($orderDetails);
             //dd($produit);
           }
-
-
-           // $this->entityManager->flush();
-        }
-        
-        return $this->render('order/add.html.twig',[
+            // $this->entityManager->flush();
+          return $this->render('order/add.html.twig',[
             
             'cart'=>$cart->getFull(),
-            'carrier' => $carriers
+            'carrier' => $carriers,
+            'delivery' => $delivery_content
         ]);
-    }
+           }
+           
+           return $this->redirectToRoute('app_cart');
+        } 
+        
+       
+
+    
 }

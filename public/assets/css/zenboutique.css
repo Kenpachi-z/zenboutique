@@ -57,7 +57,7 @@
 }
 .form-check{
     background-image: linear-gradient(to right bottom, #6adb7f, #64df9d, #68e2b7, #78e3cc, #8fe4db, #8ce0e5, #8edbeb, #96d6ef, #90c9f6, #9db9f7, #b6a6ee, #d190d7);
-    padding: 20px 65px;
+    padding: 20px 45px;
     margin-top: 7px;
 
 }
@@ -67,7 +67,7 @@
 .order-summary{
     background-image: linear-gradient(to right bottom, #6adb7f, #64df9d, #68e2b7, #78e3cc, #8fe4db, #8ce0e5, #8edbeb, #96d6ef, #90c9f6, #9db9f7, #b6a6ee, #d190d7);
     padding: 15px;
-    margin-top: 14px;
+    margin-top: 41px;
     
 
 }
