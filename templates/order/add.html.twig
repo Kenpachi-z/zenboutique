@@ -54,11 +54,12 @@ Mon transporteur
 
 <br>
 <div class="text-end justify-content">
+
 <hr>
 <strong>Sous-total :</strong>{{ (total / 100 )|number_format(2, ',','.')}} €<br>
-<strong>Livraison :</strong>20€
+<strong>Livraison :</strong>{{ (carrier.price )|number_format(2, ',','.')}} €<br>
 <hr>
-<strong>Total:</strong>1200€
+<strong>Total:</strong>{{ ((total / 100 ) + carrier.price)|number_format(2, ',','.')}} €<br>
 </div>
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
 <a href ="" class ="btn btn-dark col-6 mt-3">Payer</a>
