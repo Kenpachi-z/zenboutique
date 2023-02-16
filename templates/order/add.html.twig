@@ -23,6 +23,8 @@ Mon transporteur
 </div>
 
 <div class="order-summary">
+{% set total = null %}
+  
 {% for key,produit in cart %}
 <div class ="row {% if key > 0 %}mt-2{% endif %}">
 <div class =" col-2">
@@ -31,22 +33,37 @@ Mon transporteur
 
 <div class =" col-8 my-auto">
 {{ produit.produit.name }}<br>
- <small>{{ produit.produit.subtitle }}</small>
+ <small>
+ {{ produit.produit.subtitle }}
+ </small>
+ <br>
+ x {{produit.quantity}} 
 </div>
 
 <div class =" col-2 my-auto"> 
-x {{produit.quantity}} 
+ {{ ((produit.produit.price * produit.quantity) /100 )|number_format(2, ',','.') }} €
 </div>
 </div>
 
-
+   {% set total = total + (produit.produit.price * produit.quantity) %}
 {% endfor %}
 </div>
 
 
 </div>
+
+<br>
+<div class="text-end justify-content">
+<hr>
+<strong>Sous-total :</strong>{{ (total / 100 )|number_format(2, ',','.')}} €<br>
+<strong>Livraison :</strong>20€
+<hr>
+<strong>Total:</strong>1200€
+</div>
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
 <a href ="" class ="btn btn-dark col-6 mt-3">Payer</a>
 </div>
+
+
 </div>
 {% endblock %}

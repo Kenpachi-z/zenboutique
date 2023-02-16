@@ -46,7 +46,7 @@ Retrouvez l'ensembles des produits que vous avez ajouté à votre panier.
 
       <td> {{(produit.produit.price /100)|number_format(2, ',','.')}} </td>
       <td> {{ ((produit.produit.price * produit.quantity) /100 )|number_format(2, ',','.') }} €</td>
-    
+
       <td>
       {#supprimer produit #}
       <a href="{{ path('app_delete_to_cart', {'id' :produit.produit.id}) }} ">
