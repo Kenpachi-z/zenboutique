@@ -13,7 +13,9 @@ use Symfony\Component\Form\Extension\Core\Type\DateTimeImmutable;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-;
+use Stripe\Stripe;
+use Stripe\Checkout\Session;
+
 class OrderController extends AbstractController
 {
     private $entityManager;
@@ -89,6 +91,9 @@ class OrderController extends AbstractController
           
           $this->entityManager->persist($order);
 
+          $products_for_stripe =[];
+          $YOUR_DOMAIN = 'http://127.0.0.1:8000';
+
          //Enregistrer mes produits orderDetails()
 
           foreach($cart->getFull() as $produit) {
@@ -101,9 +106,51 @@ class OrderController extends AbstractController
             $orderDetails->setQuantity($produit ['produit']->getPrice());
             $orderDetails->setTotal($produit ['produit']->getPrice() * $produit ['quantity']);
             $this->entityManager->persist($orderDetails);
-            //dd($produit);
+
+            $products_for_stripe[] = [
+                'price_data' =>[
+                    'currency' => 'eur',
+                    'unit_amount' => $produit ['produit']->getPrice(),
+                    'product_data' => [
+                        'name' => $produit['produit'] ->getName(),
+                        'images'=>[$YOUR_DOMAIN."/img/".$produit['produit'] ->getIllustration()],
+                    ],
+                ],
+                'quantity' => $produit ['quantity'],
+
+            ];
+            
+
+            
           }
-            $this->entityManager->flush();
+      
+            //$this->entityManager->flush();
+        
+// Keep your Stripe API key protected by including it as an environment variable
+// or in a private script that does not publicly expose the source code.
+
+// This is your test secret API key.
+$stripeSecretKey = 'sk_test_51McRryAfx61CvZPsIHsiBqrOENX3UrMQa92CKNKD8erxfl5oUkkCuGC3MP1uEV34Crm9JpM0FZNxvqn3PsH3nwow007aG0XnB2';
+
+            Stripe::setApiKey($stripeSecretKey);
+
+            
+
+          
+            $checkout_session = Session::create([
+
+                'payment_method_types' => ['card'],
+              'line_items' => [$products_for_stripe
+            ],
+              'mode' => 'payment',
+              'success_url' => $YOUR_DOMAIN . '/success.html',
+              'cancel_url' => $YOUR_DOMAIN . '/cancel.html',
+            ]);
+dump($checkout_session->id);
+dd($checkout_session);
+
+
+
           return $this->render('order/add.html.twig',[
            
             'cart'=>$cart->getFull(),
