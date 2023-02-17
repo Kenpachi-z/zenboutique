@@ -146,8 +146,6 @@ $stripeSecretKey = 'sk_test_51McRryAfx61CvZPsIHsiBqrOENX3UrMQa92CKNKD8erxfl5oUkk
               'success_url' => $YOUR_DOMAIN . '/success.html',
               'cancel_url' => $YOUR_DOMAIN . '/cancel.html',
             ]);
-dump($checkout_session->id);
-dd($checkout_session);
 
 
 
@@ -155,7 +153,8 @@ dd($checkout_session);
            
             'cart'=>$cart->getFull(),
             'carrier' => $carriers,
-            'delivery' => $delivery_content
+            'delivery' => $delivery_content,
+            'stripe_checkout_session'=> $checkout_session->id
         ]);
            }
            
