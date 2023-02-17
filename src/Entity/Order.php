@@ -50,7 +50,14 @@ class Order
     {
         return $this->id;
     }
-
+public function getTotal()
+{
+    $total = null;
+    foreach($this->getOrderDetails()->getValues() as $produit){
+        $total = $total + ($produit->getPrice() * $produit->getQuantity());
+        return $total;
+    }
+}
     public function getUser(): ?User
     {
         return $this->user;
