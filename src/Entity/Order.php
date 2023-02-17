@@ -41,6 +41,9 @@ class Order
     #[ORM\Column]
     private ?bool $IsPaid = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $reference = null;
+
     public function __construct()
     {
         $this->orderDetails = new ArrayCollection();
@@ -156,6 +159,18 @@ public function getTotal()
     public function setIsPaid(bool $IsPaid): self
     {
         $this->IsPaid = $IsPaid;
+
+        return $this;
+    }
+
+    public function getReference(): ?string
+    {
+        return $this->reference;
+    }
+
+    public function setReference(string $reference): self
+    {
+        $this->reference = $reference;
 
         return $this;
     }
